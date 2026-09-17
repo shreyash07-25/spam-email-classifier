@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SpamGuard AI</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            background: #000;
+        }
+
+        textarea::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        textarea::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        textarea::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 999px;
+        }
+
+        .result {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            display: inline-block;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+
+<body class="min-h-screen bg-black text-white">
+
+    <div class="min-h-screen">
+
+
+        <!-- ========================================================= -->
+        <!-- HEADER -->
+        <!-- ========================================================= -->
+
+        <header class="border-b border-zinc-800 bg-zinc-950/95 shadow-lg shadow-black/30">
+
+    <div class="max-w-6xl mx-auto px-5 sm:px-6 py-5">
+
+        <div class="flex items-center justify-between">
+
+            <!-- Brand -->
+            <div class="flex items-center gap-3">
+
+                <div
+                    class="w-11 h-11 rounded-xl
+                           bg-purple-600
+                           flex items-center justify-center
+                           shadow-lg shadow-purple-600/25"
+                >
+                    <span class="text-white text-xl">
+                        ✦
+                    </span>
+                </div>
+
+                <div>
+                    <h2
+                        class="text-xl font-bold
+                               tracking-tight text-white"
+                    >
+                        SpamGuard
+                    </h2>
+
+                    <p class="text-xs text-zinc-400">
+                        AI Email Security
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- API Status -->
+            <div
+                class="flex items-center gap-2
+                       px-4 py-2
+                       rounded-full
+                       border border-green-500/20
+                       bg-green-500/5"
+            >
+
+                <span
+                    class="status-dot
+                           w-2 h-2
+                           rounded-full
+                           bg-green-400
+                           shadow-sm shadow-green-400"
+                ></span>
+
+                <span
+                    class="text-sm
+                           font-medium
+                           text-green-400"
+                >
+                    API Online
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+        <!-- ========================================================= -->
+        <!-- MAIN -->
+        <!-- ========================================================= -->
+
+        <main class="max-w-6xl mx-auto px-5 sm:px-6">
+
+
+            <!-- ===================================================== -->
+            <!-- HERO -->
+            <!-- ===================================================== -->
+
+            <section class="text-center pt-16 sm:pt-24 pb-12">
+
+                <!-- Eyebrow -->
+                <div
+                    class="inline-flex items-center gap-2
+                           px-3 py-1.5 rounded-full
+                           border border-zinc-800
+                           bg-zinc-950
+                           text-[11px] sm:text-xs
+                           font-semibold tracking-widest
+                           text-zinc-400"
+                >
+
+                    <span
+                        class="px-1.5 py-0.5 rounded
+                               bg-purple-500/10
+                               text-purple-400"
+                    >
+                        AI
+                    </span>
+
+                    INTELLIGENT MESSAGE ANALYSIS
+
+                </div>
+
+
+                <!-- Heading -->
+                <h1
+                    class="mt-7 text-4xl sm:text-5xl md:text-6xl
+                           font-extrabold tracking-tight
+                           leading-tight"
+                >
+
+                    Is this message
+
+                    <span
+                        class="text-transparent bg-clip-text
+                               bg-gradient-to-r from-purple-400
+                               to-indigo-400"
+                    >
+                        safe?
+                    </span>
+
+                </h1>
+
+
+                <!-- Description -->
+                <p
+                    class="mt-5 max-w-2xl mx-auto
+                           text-sm sm:text-base
+                           leading-7 text-zinc-500"
+                >
+                    Detect unwanted messages using machine learning.
+                    Paste an email or message and get an instant
+                    classification.
+                </p>
+
+            </section>
+
+
+
+            <!-- ===================================================== -->
+            <!-- ANALYZER -->
+            <!-- ===================================================== -->
+
+            <section class="max-w-4xl mx-auto pb-16">
+
+                <div
+                    class="rounded-2xl
+                           border border-zinc-800
+                           bg-zinc-950
+                           p-5 sm:p-7
+                           shadow-2xl shadow-black"
+                >
+
+
+                    <!-- Analyzer Header -->
+
+                    <div
+                        class="flex flex-col sm:flex-row
+                               sm:items-center
+                               sm:justify-between
+                               gap-4 mb-6"
+                    >
+
+                        <div>
+
+                            <p
+                                class="text-[11px]
+                                       font-semibold
+                                       tracking-[0.2em]
+                                       text-zinc-600"
+                            >
+                                MESSAGE ANALYZER
+                            </p>
+
+                            <h3
+                                class="mt-1 text-xl sm:text-2xl
+                                       font-bold text-white"
+                            >
+                                Paste your message
+                            </h3>
+
+                        </div>
+
+
+                        <!-- Model -->
+
+                        <div
+                            class="self-start sm:self-auto
+                                   inline-flex items-center gap-2
+                                   px-3 py-1.5
+                                   rounded-full
+                                   border border-zinc-800
+                                   bg-black
+                                   text-xs text-zinc-400"
+                        >
+
+                            <span class="text-purple-400">
+                                ●
+                            </span>
+
+                            Naive Bayes
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Textarea -->
+
+                    <div>
+
+                        <textarea
+    id="message"
+    maxlength="5000"
+    placeholder="Paste an email, SMS, or suspicious message here..."
+    class="w-full h-56 sm:h-64
+           resize-none
+           rounded-xl
+           border border-zinc-700
+           bg-zinc-900
+           px-5 py-4
+           text-sm sm:text-base
+           leading-7 text-white
+           placeholder-zinc-500
+           outline-none
+           shadow-inner shadow-black/40
+           transition-all duration-200
+           hover:border-zinc-600
+           focus:border-purple-500
+           focus:ring-2
+           focus:ring-purple-500/20"
+></textarea>
+
+                        <!-- Textarea Bottom -->
+
+                        <div
+                            class="flex items-center
+                                   justify-between
+                                   mt-3 px-1"
+                        >
+
+                            <span
+                                id="charCount"
+                                class="text-xs text-zinc-600"
+                            >
+                                0 / 5000
+                            </span>
+
+
+                            <button
+                                id="clearButton"
+                                onclick="clearMessage()"
+                                class="text-xs sm:text-sm
+                                       text-zinc-500
+                                       hover:text-white
+                                       transition"
+                            >
+                                Clear
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Analyze Button -->
+
+                    <button
+                        id="checkButton"
+                        onclick="checkMessage()"
+                        class="w-full mt-6
+                               py-3.5
+                               rounded-xl
+                               bg-purple-600
+                               hover:bg-purple-500
+                               active:bg-purple-700
+                               text-sm sm:text-base
+                               font-semibold
+                               text-white
+                               transition
+                               shadow-lg
+                               shadow-purple-900/20
+                               disabled:opacity-50
+                               disabled:cursor-not-allowed"
+                    >
+
+                        <!-- Normal -->
+
+                        <span id="buttonContent">
+                            Analyze Message
+                            <span class="ml-1">→</span>
+                        </span>
+
+
+                        <!-- Loading -->
+
+                        <span
+                            id="loadingContent"
+                            class="hidden items-center
+                                   justify-center gap-2"
+                        >
+                            <span class="spinner"></span>
+                            Analyzing...
+                        </span>
+
+                    </button>
+
+
+
+                    <!-- ================================================= -->
+                    <!-- EXAMPLES -->
+                    <!-- ================================================= -->
+
+                    <div
+                        class="flex flex-wrap
+                               items-center gap-2
+                               mt-5"
+                    >
+
+                        <span
+                            class="text-xs text-zinc-600 mr-1"
+                        >
+                            Try an example:
+                        </span>
+
+
+                        <button
+                            onclick="useExample('normal')"
+                            class="px-3 py-1.5
+                                   rounded-lg
+                                   border border-zinc-800
+                                   bg-black
+                                   text-xs text-zinc-400
+                                   hover:border-zinc-700
+                                   hover:text-white
+                                   transition"
+                        >
+                            Normal message
+                        </button>
+
+
+                        <button
+                            onclick="useExample('spam')"
+                            class="px-3 py-1.5
+                                   rounded-lg
+                                   border border-zinc-800
+                                   bg-black
+                                   text-xs text-zinc-400
+                                   hover:border-red-500/30
+                                   hover:text-red-400
+                                   transition"
+                        >
+                            Spam message
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ================================================= -->
+                    <!-- RESULT -->
+                    <!-- ================================================= -->
+
+                    <div
+                        id="result"
+                        class="result hidden mt-6
+                               rounded-xl
+                               border border-zinc-800
+                               bg-black
+                               p-5 sm:p-6"
+                    >
+
+                        <!-- Result Main -->
+
+                        <div
+                            class="flex items-start gap-4"
+                        >
+
+                            <!-- Icon -->
+
+                            <div
+                                id="resultIcon"
+                                class="result-icon
+                                       flex-shrink-0
+                                       w-11 h-11
+                                       rounded-full
+                                       bg-green-500/10
+                                       border border-green-500/20
+                                       flex items-center
+                                       justify-center
+                                       text-green-400
+                                       font-bold text-lg"
+                            >
+                                ✓
+                            </div>
+
+
+                            <!-- Text -->
+
+                            <div class="min-w-0">
+
+                                <p
+                                    class="result-label
+                                           text-[10px]
+                                           font-semibold
+                                           tracking-[0.2em]
+                                           text-zinc-600"
+                                >
+                                    CLASSIFICATION
+                                </p>
+
+
+                                <h2
+                                    id="prediction"
+                                    class="mt-1 text-2xl
+                                           font-extrabold
+                                           text-white"
+                                >
+                                    HAM
+                                </h2>
+
+
+                                <p
+                                    id="resultDescription"
+                                    class="mt-1
+                                           text-sm
+                                           leading-6
+                                           text-zinc-500"
+                                >
+                                    This message appears to be legitimate.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- Confidence -->
+
+                        <div class="mt-7">
+
+                            <div
+                                class="flex items-center
+                                       justify-between mb-2"
+                            >
+
+                                <span
+                                    class="text-xs
+                                           font-medium
+                                           text-zinc-500"
+                                >
+                                    Confidence
+                                </span>
+
+
+                                <strong
+                                    id="confidenceValue"
+                                    class="text-sm
+                                           font-semibold
+                                           text-white"
+                                >
+                                    99.00%
+                                </strong>
+
+                            </div>
+
+
+                            <div
+                                class="progress-track
+                                       w-full h-2
+                                       rounded-full
+                                       bg-zinc-900
+                                       overflow-hidden"
+                            >
+
+                                <div
+                                    id="confidenceBar"
+                                    class="progress-bar
+                                           h-full
+                                           rounded-full
+                                           bg-purple-500
+                                           transition-all
+                                           duration-500"
+                                    style="width: 0%"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ===================================================== -->
+            <!-- FEATURES -->
+            <!-- ===================================================== -->
+
+            <section
+                class="grid grid-cols-1
+                       md:grid-cols-3
+                       gap-4
+                       max-w-5xl
+                       mx-auto
+                       pb-20"
+            >
+
+
+                <!-- Feature 01 -->
+
+                <div
+                    class="group
+                           rounded-xl
+                           border border-zinc-900
+                           bg-zinc-950
+                           p-5
+                           hover:border-zinc-800
+                           transition"
+                >
+
+                    <div
+                        class="text-xs
+                               font-mono
+                               text-purple-400
+                               mb-5"
+                    >
+                        01
+                    </div>
+
+
+                    <h4
+                        class="text-base
+                               font-semibold
+                               text-white"
+                    >
+                        Text Processing
+                    </h4>
+
+
+                    <p
+                        class="mt-2
+                               text-sm
+                               leading-6
+                               text-zinc-600"
+                    >
+                        Your message is cleaned and transformed
+                        into numerical features using TF-IDF.
+                    </p>
+
+                </div>
+
+
+
+                <!-- Feature 02 -->
+
+                <div
+                    class="group
+                           rounded-xl
+                           border border-zinc-900
+                           bg-zinc-950
+                           p-5
+                           hover:border-zinc-800
+                           transition"
+                >
+
+                    <div
+                        class="text-xs
+                               font-mono
+                               text-purple-400
+                               mb-5"
+                    >
+                        02
+                    </div>
+
+
+                    <h4
+                        class="text-base
+                               font-semibold
+                               text-white"
+                    >
+                        Machine Learning
+                    </h4>
+
+
+                    <p
+                        class="mt-2
+                               text-sm
+                               leading-6
+                               text-zinc-600"
+                    >
+                        A trained Naive Bayes classifier analyzes
+                        the message patterns.
+                    </p>
+
+                </div>
+
+
+
+                <!-- Feature 03 -->
+
+                <div
+                    class="group
+                           rounded-xl
+                           border border-zinc-900
+                           bg-zinc-950
+                           p-5
+                           hover:border-zinc-800
+                           transition"
+                >
+
+                    <div
+                        class="text-xs
+                               font-mono
+                               text-purple-400
+                               mb-5"
+                    >
+                        03
+                    </div>
+
+
+                    <h4
+                        class="text-base
+                               font-semibold
+                               text-white"
+                    >
+                        Instant Result
+                    </h4>
+
+
+                    <p
+                        class="mt-2
+                               text-sm
+                               leading-6
+                               text-zinc-600"
+                    >
+                        Get the classification and confidence
+                        score in milliseconds.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+
+        <!-- ========================================================= -->
+        <!-- FOOTER -->
+        <!-- ========================================================= -->
+
+        <footer
+            class="border-t border-zinc-900"
+        >
+
+            <div
+                class="max-w-6xl mx-auto
+                       px-5 sm:px-6
+                       py-6
+                       flex flex-col sm:flex-row
+                       items-center
+                       justify-between
+                       gap-2"
+            >
+
+                <span
+                    class="text-xs
+                           font-medium
+                           text-zinc-500"
+                >
+                    SpamGuard AI
+                </span>
+
+
+                <span
+                    class="text-xs
+                           text-zinc-700"
+                >
+                    TF-IDF · Naive Bayes · FastAPI
+                </span>
+
+            </div>
+
+        </footer>
+
+    </div>
+
+
+
+    <!-- Existing JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
