@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://spam-email-classifier-tq7u.onrender.com";
 
 const messageInput = document.getElementById("message");
 const charCount = document.getElementById("charCount");
